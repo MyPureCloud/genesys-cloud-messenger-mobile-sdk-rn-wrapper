@@ -22,7 +22,6 @@ def safeExtGet(prop, fallback) {
 }
 
 apply plugin: 'com.android.library'
-apply plugin: "kotlin-android"
 
 buildscript {
     // The Android Gradle plugin is only required when opening the android folder stand-alone.
@@ -38,7 +37,6 @@ buildscript {
             // This should reflect the Gradle plugin version used by
             // the minimum React Native version supported.
             classpath 'com.android.tools.build:gradle:4.2.0'
-            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30"
             classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
 
         }
@@ -56,10 +54,6 @@ android {
     }
     lintOptions {
         abortOnError false
-    }
-    kotlinOptions {
-        freeCompilerArgs = ['-Xjvm-default=compatibility']
-        jvmTarget = "1.8"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
