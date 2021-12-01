@@ -2,9 +2,6 @@
 import com.genesys.jenkins.Service
 
 def notifications = null
-String[] mailingList = [
-  "Brian.Dupuis@genesys.com"
-]
 
 def isReleaseBranch() {
     return env.SHORT_BRANCH.equals('main');
@@ -29,6 +26,19 @@ pipeline {
   }
 
   stages {
+    stage('Setup mailing list parameter') {
+      steps {
+        script {
+          properties([
+            string(
+              defaultValue: '',
+              name: 'EMAIL-LIST',
+              trim: true
+            )
+          ])
+        }
+      }
+    }
     stage('Import notifications lib') {
       steps {
         script {
@@ -104,13 +114,13 @@ pipeline {
   post {
     fixed {
       script {
-        notifications.emailResults(mailingList.join(" "))
+        notifications.emailResults(params.EMAIL-LIST)
       }
     }
 
     failure {
       script {
-        notifications.emailResults(mailingList.join(" "))
+        notifications.emailResults(params.EMAIL-LIST)
       }
     }
   }
