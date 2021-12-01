@@ -91,32 +91,6 @@ In order to be able to use the chat module on android please follow the next ste
     maven {url "https://bold360ai-mobile-artifacts.s3.amazonaws.com/dx/common/dev/"}
     ```
 
-- Add the following dependency:
-    ```gradle
-    classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.30"
-    ```
-
-2. Go to `build.gradle` file, on the Android project's internal module.
-    ```cmd
-    YourAppFolder
-    ├── android
-    │   ├── app
-    │   │   ├── build.gradle  <---
-    │   │   ├── proguard-rules.pro
-    │   │   └── src
-    │   ├── build.gradle
-    │   ├── gradle
-    │   │   └── wrapper
-    │   ├── gradle.properties
-    │   ├── gradlew
-    │   ├── gradlew.bat
-    │   └── settings.gradle
-    |
-    ```
-
-- Add kotlin plugin as follows:
-`apply plugin: "kotlin-android"`
-
 ### ios
 
 In order to be able to use the chat module on iOS please follow the next steps.
