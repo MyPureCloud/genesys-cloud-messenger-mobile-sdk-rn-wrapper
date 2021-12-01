@@ -30,7 +30,7 @@ public class GenesysCloudChatActivity extends AppCompatActivity implements ChatE
     public static final String EXTRA_TOKEN_STORE_KEY = "tokenStoreKey";
     public static final String EXTRA_LOGGING = "logging";
 
-    private ChatController boldController;
+    private ChatController chatController;
     private MenuItem endMenu;
     private AccountInfo account;
 
@@ -59,7 +59,7 @@ public class GenesysCloudChatActivity extends AppCompatActivity implements ChatE
     protected void onStart() {
         super.onStart();
 
-        Log.i(TAG, "onStart: " + boldController == null ? "controller is null" : boldController.isActive() ? "true" : "false");
+        Log.i(TAG, "onStart: " + chatController == null ? "controller is null" : chatController.isActive() ? "true" : "false");
     }
 
     @Override
@@ -97,8 +97,8 @@ public class GenesysCloudChatActivity extends AppCompatActivity implements ChatE
     @Override
     public void onBackPressed() {
         if (getSupportFragmentManager().getBackStackEntryCount() == 1) {
-            if (boldController != null) {
-                boldController.endChat(true);
+            if (chatController != null) {
+                chatController.endChat(true);
             }
         }
         super.onBackPressed();
@@ -114,8 +114,8 @@ public class GenesysCloudChatActivity extends AppCompatActivity implements ChatE
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.end_current_chat) {
-            if (boldController != null) {
-                boldController.endChat(false);
+            if (chatController != null) {
+                chatController.endChat(false);
             }
             item.setEnabled(false);
             return true;
@@ -163,7 +163,7 @@ public class GenesysCloudChatActivity extends AppCompatActivity implements ChatE
     }
 
     private void createChat() {
-        boldController = new ChatController.Builder(this).chatEventListener(this).build(account, result -> {
+        chatController = new ChatController.Builder(this).chatEventListener(this).build(account, result -> {
             if (result.getError() == null && result.getFragment() != null) {
                 openConversationFragment(result.getFragment());
             } else if (result.getError() == null && result.getFragment() == null) {
@@ -183,7 +183,7 @@ public class GenesysCloudChatActivity extends AppCompatActivity implements ChatE
             }
 
             if (chatFrag != null) {
-                boldController.restoreChat(chatFrag);
+                chatController.restoreChat(chatFrag);
             } else {
                 fm.beginTransaction()
                         .replace(R.id.chat_container, fragment, CONVERSATION_FRAGMENT_TAG)
@@ -194,9 +194,9 @@ public class GenesysCloudChatActivity extends AppCompatActivity implements ChatE
     }
 
     private void destructChat() {
-        if (boldController != null && !boldController.getWasDestructed()) {
-            boldController.terminateChat();
-            boldController.destruct();
+        if (chatController != null && !chatController.getWasDestructed()) {
+            chatController.terminateChat();
+            chatController.destruct();
         }
     }
 }
