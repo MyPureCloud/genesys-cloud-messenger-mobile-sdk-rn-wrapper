@@ -108,9 +108,7 @@ pipeline {
               npm publish --dry-run 1>&2
           '''
           sshagent (credentials: ['3aa16916-868b-4290-a9ee-b1a05343667e']) {
-            sh '''
-                git push --tags -u origin ${env.SHORT_BRANCH}
-            '''
+            sh "git push --tags -u origin ${env.SHORT_BRANCH}"
           }
         }
       }
