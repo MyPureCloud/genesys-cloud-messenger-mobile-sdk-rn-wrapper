@@ -118,12 +118,14 @@ pipeline {
   post {
     fixed {
       script {
+        echo "Mailing list is: ${params.EMAIL-LIST}"
         notifications.emailResults("${params.EMAIL-LIST}")
       }
     }
 
     failure {
       script {
+        echo "Mailing list is: ${params.EMAIL-LIST}"
         notifications.emailResults("${params.EMAIL-LIST}")
       }
     }
