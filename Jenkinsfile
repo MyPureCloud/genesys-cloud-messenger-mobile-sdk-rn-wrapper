@@ -33,7 +33,7 @@ pipeline {
             parameters([
               string(
                 defaultValue: '',
-                name: 'EMAIL-LIST',
+                name: 'EMAIL_LIST',
                 trim: true
               )
             ])
@@ -118,13 +118,13 @@ pipeline {
   post {
     fixed {
       script {
-        notifications.emailResults("brian.dupuis@genesys.com")
+        notifications.emailResults(params.EMAIL_LIST)
       }
     }
 
     failure {
       script {
-        notifications.emailResults("brian.dupuis@genesys.com")
+        notifications.emailResults(params.EMAIL_LIST)
       }
     }
   }
