@@ -118,13 +118,13 @@ pipeline {
   post {
     fixed {
       script {
-        notifications.emailResults(params.EMAIL-LIST)
+        notifications.emailResults("brian.dupuis@genesys.com")
       }
     }
 
     failure {
       script {
-        notifications.emailResults(params.EMAIL-LIST)
+        notifications.emailResults("brian.dupuis@genesys.com")
       }
     }
   }
