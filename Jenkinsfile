@@ -30,11 +30,13 @@ pipeline {
       steps {
         script {
           properties([
-            string(
-              defaultValue: '',
-              name: 'EMAIL-LIST',
-              trim: true
-            )
+            parameters([
+              string(
+                defaultValue: '',
+                name: 'EMAIL-LIST',
+                trim: true
+              )
+            ])
           ])
         }
       }
