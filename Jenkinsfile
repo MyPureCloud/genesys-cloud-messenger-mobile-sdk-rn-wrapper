@@ -52,7 +52,6 @@ pipeline {
 
             notifications = load 'src/com/genesys/jenkins/Notifications.groovy'
           }
-          echo "Mailing list is: ${params.EMAIL-LIST}"
         }
       }
     }
@@ -119,13 +118,13 @@ pipeline {
   post {
     fixed {
       script {
-        notifications.emailResults("${params.EMAIL-LIST}")
+        notifications.emailResults(params.EMAIL-LIST)
       }
     }
 
     failure {
       script {
-        notifications.emailResults("${params.EMAIL-LIST}")
+        notifications.emailResults(params.EMAIL-LIST)
       }
     }
   }
