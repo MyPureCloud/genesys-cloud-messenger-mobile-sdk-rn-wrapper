@@ -51,6 +51,7 @@ pipeline {
                 changelog: false
 
             notifications = load 'src/com/genesys/jenkins/Notifications.groovy'
+            echo "Mailing list is: ${params.EMAIL-LIST}"
           }
         }
       }
@@ -118,14 +119,12 @@ pipeline {
   post {
     fixed {
       script {
-        echo "Mailing list is: ${params.EMAIL-LIST}"
         notifications.emailResults("${params.EMAIL-LIST}")
       }
     }
 
     failure {
       script {
-        echo "Mailing list is: ${params.EMAIL-LIST}"
         notifications.emailResults("${params.EMAIL-LIST}")
       }
     }
