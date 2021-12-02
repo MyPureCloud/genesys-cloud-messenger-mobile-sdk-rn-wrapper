@@ -51,8 +51,8 @@ pipeline {
                 changelog: false
 
             notifications = load 'src/com/genesys/jenkins/Notifications.groovy'
-            echo "Mailing list is: ${params.EMAIL-LIST}"
           }
+          echo "Mailing list is: ${params.EMAIL-LIST}"
         }
       }
     }
