@@ -98,7 +98,7 @@ pipeline {
           '''
           sh "${env.WORKSPACE}/${env.NPM_UTIL_PATH}/scripts/auto-version-bump.sh"
           
-          # Do not include the npm-utils directory or the publish credentials in the published package.
+          // Do not include the npm-utils directory or the publish credentials in the published package.
           echo "npm-utils" >> .npmignore
           npm publish --dry-run 1>&2
           sshagent (credentials: ['3aa16916-868b-4290-a9ee-b1a05343667e']) {
