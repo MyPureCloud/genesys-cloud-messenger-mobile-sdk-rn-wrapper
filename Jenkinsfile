@@ -18,7 +18,7 @@ pipeline {
     NPM_UTIL_PATH = "npm-utils"
     REPO_DIR = "repo"
     SHORT_BRANCH = env.GIT_BRANCH.replaceFirst(/^origin\//, '');
-    NPM_TOKEN = credentials(env.NPM_CREDENTIALS_ID)
+    NPM_TOKEN = credentials("{$env.NPM_CREDENTIALS_ID}")
   }
 
   tools {
