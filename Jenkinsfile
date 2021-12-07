@@ -100,10 +100,9 @@ pipeline {
       */
       steps {
           dir(env.REPO_DIR) {
-          sh '''
-              echo "registry=https://registry.npmjs.org" > ./.npmrc
-              echo "//registry.npmjs.org/:_authToken=${params.NPM_CREDENTIALS_ID}" >> ./.npmrc
-          '''
+          sh 'echo "registry=https://registry.npmjs.org" > ./.npmrc'
+          sh "echo \"//registry.npmjs.org/:_authToken=${params.NPM_CREDENTIALS_ID}\" >> ./.npmrc"
+
           sh "${env.WORKSPACE}/${env.NPM_UTIL_PATH}/scripts/auto-version-bump.sh"
           
           // Do not include the npm-utils directory or the publish credentials in the published package.
