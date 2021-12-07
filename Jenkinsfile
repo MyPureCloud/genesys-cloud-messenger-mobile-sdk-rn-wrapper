@@ -18,7 +18,7 @@ pipeline {
     NPM_UTIL_PATH = "npm-utils"
     REPO_DIR = "repo"
     SHORT_BRANCH = env.GIT_BRANCH.replaceFirst(/^origin\//, '');
-    NPM_TOKEN = credentials('2844c47b-19b8-4c5f-b901-190de49c0883')
+    NPM_TOKEN = credentials(env.NPM_CREDENTIALS_ID)
   }
 
   tools {
@@ -34,6 +34,11 @@ pipeline {
               string(
                 defaultValue: '',
                 name: 'EMAIL_LIST',
+                trim: true
+              ),
+              string(
+                defaultValue: '',
+                name: 'NPM_CREDENTIALS_ID',
                 trim: true
               )
             ])
@@ -103,7 +108,7 @@ pipeline {
           // Do not include the npm-utils directory or the publish credentials in the published package.
           sh '''
               echo "npm-utils" >> .npmignore
-              npm publish 1>&2
+              npm publish --dry-run 1>&2
           '''
           sshagent (credentials: ['3aa16916-868b-4290-a9ee-b1a05343667e']) {
             sh "git push --tags -u origin ${env.SHORT_BRANCH}"
