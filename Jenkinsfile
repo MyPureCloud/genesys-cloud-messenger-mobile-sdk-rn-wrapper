@@ -18,7 +18,6 @@ pipeline {
     NPM_UTIL_PATH = "npm-utils"
     REPO_DIR = "repo"
     SHORT_BRANCH = env.GIT_BRANCH.replaceFirst(/^origin\//, '');
-    NPM_TOKEN = credentials("{$env.NPM_CREDENTIALS_ID}")
   }
 
   tools {
@@ -101,7 +100,7 @@ pipeline {
           dir(env.REPO_DIR) {
           sh '''
               echo "registry=https://registry.npmjs.org" > ./.npmrc
-              echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> ./.npmrc
+              echo "//registry.npmjs.org/:_authToken=${params.NPM_CREDENTIALS_ID}" >> ./.npmrc
           '''
           sh "${env.WORKSPACE}/${env.NPM_UTIL_PATH}/scripts/auto-version-bump.sh"
           
