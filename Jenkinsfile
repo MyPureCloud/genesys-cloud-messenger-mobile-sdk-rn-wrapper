@@ -93,9 +93,11 @@ pipeline {
     }
 
     stage('Publish Library') {
+      /*
       when {
         expression { isReleaseBranch()  }
       }
+      */
       steps {
           dir(env.REPO_DIR) {
           sh '''
